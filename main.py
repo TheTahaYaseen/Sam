@@ -152,6 +152,9 @@ def pushing_schedule_to_announcement():
         for task_time, task_announcement in CURRENT_SCHEDULE.items():
             
             if current_time == task_time:
+
+                CURRENT_SCHEDULE.pop(task_time)
+
                 for iteration in range(3):
                     SAYING_QUEUE.append(task_announcement)
 
