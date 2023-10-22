@@ -65,6 +65,7 @@ def get_schedule(schedule_date):
 
 # Structure = {"time": {"task": "task details"}}
 CURRENT_SCHEDULE = {}
+SAYING_QUEUE = []
 
 # Function For Populating Global Schedule Dictionary With A Proper Format
 
@@ -89,6 +90,10 @@ def populate_current_schedule(schedule_to_populate_with):
                 CURRENT_SCHEDULE[task_time] = f"{task}"
 
     time.sleep(15)
+
+# Thread For Properly Announcing
+def announcing_stuff():
+    pass
 
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
@@ -124,9 +129,9 @@ thread_for_keeping_schedule_up_to_date = Thread(target=keeping_schedule_up_to_da
 
 # Thread For Schedule Announcement For The Day | Going Through The Dictiornary, Checking For Each's Time
 
-def announcing_schedule():
+def pushing_schedule_to_announcement():
     
-    global CURRENT_SCHEDULE 
+    global CURRENT_SCHEDULE, SAYING_QUEUE
 
     while True:
         
@@ -135,11 +140,10 @@ def announcing_schedule():
         for task_time, task_announcement in CURRENT_SCHEDULE.items():
             
             if current_time == task_time:
-                speak(task_announcement)
-                speak(task_announcement)
-            
+                for iteration in range(3):
+                    SAYING_QUEUE.append(task_announcement)
 
-announcing_schedule_thread = Thread(target=announcing_schedule)
+announcing_schedule_thread = Thread(target=pushing_schedule_to_announcement)
 
 # Main With Everything Compiled
 
