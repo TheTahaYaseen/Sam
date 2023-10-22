@@ -154,5 +154,6 @@ pushing_schedule_to_announcement = Thread(target=pushing_schedule_to_announcemen
 # Main With Everything Compiled
 
 if __name__ == "__main__":
+    announcing_stuff_thread.start()
     thread_for_keeping_schedule_up_to_date.start()
     pushing_schedule_to_announcement.start()
