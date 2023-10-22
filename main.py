@@ -23,7 +23,7 @@ def get_current_structured_date():
     return current_date
 
 # Get Structured Time Function
-def get_current_structured_date():
+def get_current_structured_time():
     current_datetime = datetime.datetime.now()
     current_hour = current_datetime.strftime("%H")
     current_minute = current_datetime.strftime("%M")
@@ -88,7 +88,7 @@ def populate_current_schedule(schedule_to_populate_with):
             else:
                 CURRENT_SCHEDULE[task_time] = f"{task}"
 
-    time.sleep(1)
+    time.sleep(2)
 
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
@@ -101,6 +101,8 @@ def keeping_schedule_up_to_date():
     
     previous_date = get_current_structured_date()
     previous_schedule = get_schedule(previous_date)
+
+    populate_current_schedule(previous_schedule)
 
     while True:
 
@@ -120,7 +122,25 @@ def keeping_schedule_up_to_date():
 
 thread_for_keeping_schedule_up_to_date = Thread(target=keeping_schedule_up_to_date)
 
-# Thread For Schedule Announcement For The Day | Going Through The Dictionary, Checking For Each's Time
+# Thread For Schedule Announcement For The Day | Going Through The Dictiornary, Checking For Each's Time
+
+def announcing_schedule():
+    
+    global CURRENT_SCHEDULE 
+
+    while True:
+        
+        current_time = get_current_structured_time()
+        
+        for task_time, task_announcement in CURRENT_SCHEDULE.items():
+            
+            if current_time == task_time:
+                for iteration in range(3):
+                    speak(task_announcement)
+            
+
+announcing_schedule_thread = Thread(target=announcing_schedule)
 
 # Main With Everything Compiled
-keeping_schedule_up_to_date() # Here For Testing
+thread_for_keeping_schedule_up_to_date.start()
+announcing_schedule_thread.start()
