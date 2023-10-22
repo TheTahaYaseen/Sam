@@ -24,6 +24,19 @@ service = build("sheets", "v4", credentials=credentials)
 spreadsheet_id = "1R1ooZQYaSHPByec1VqjOjUUd1SFjH_YsCsgpeZGXssI"
 
 # Getting Schedule Accordingly From Google Sheets
+def get_schedule(schedule_date):
+    sheet_name = schedule_date
+    schedule_range = f"{sheet_name}!B3:D290"
+
+    # Response Structure
+    # response = {values: arrays_of(time, task, task_details)}
+
+    response = service.spreadsheets().values().get(spreadsheetId = spreadsheet_id, range = schedule_range).execute()
+    return response
+
+current_date = get_current_structured_date()
+current_schedule = get_schedule(current_date)
+print(current_schedule)
 
 # Current Date
 
