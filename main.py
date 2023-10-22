@@ -88,7 +88,7 @@ def populate_current_schedule(schedule_to_populate_with):
             else:
                 CURRENT_SCHEDULE[task_time] = f"{task}"
 
-    time.sleep(2)
+    time.sleep(15)
 
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
@@ -135,8 +135,8 @@ def announcing_schedule():
         for task_time, task_announcement in CURRENT_SCHEDULE.items():
             
             if current_time == task_time:
-                for iteration in range(3):
-                    speak(task_announcement)
+                speak(task_announcement)
+                speak(task_announcement)
             
 
 announcing_schedule_thread = Thread(target=announcing_schedule)
