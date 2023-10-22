@@ -11,6 +11,8 @@ from threading import Thread
 
 import pyttsx3
 
+import time
+
 # Get Structured Date Function
 def get_current_structured_date():
     current_datetime = datetime.datetime.now()
@@ -86,7 +88,7 @@ def populate_current_schedule(schedule_to_populate_with):
             else:
                 CURRENT_SCHEDULE[task_time] = f"{task}"
 
-    print(CURRENT_SCHEDULE)
+    time.sleep(1)
 
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
