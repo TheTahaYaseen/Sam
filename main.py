@@ -16,6 +16,13 @@ def get_current_structure_date():
     current_date = f"{current_day_of_the_month} {current_month} {current_year}"
     return current_date
 
+# Google Sheets Variables
+
+credentials = service_account.Credentials.from_service_account_file("../credentials.json", ["https://www.googleapis.com/auth/spreadsheets"])
+service = build("sheets", "v4", credentials=credentials)
+
+spreadsheet_id = "1R1ooZQYaSHPByec1VqjOjUUd1SFjH_YsCsgpeZGXssI"
+
 # Getting Schedule Accordingly From Google Sheets
 
 
