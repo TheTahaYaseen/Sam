@@ -93,8 +93,14 @@ def populate_current_schedule(schedule_to_populate_with):
 
 # Thread For Properly Announcing
 def announcing_stuff():
-    pass
+    
+    global SAYING_QUEUE
 
+    while True:
+        for thing_to_say in SAYING_QUEUE:
+            speak(thing_to_say)
+
+announcing_stuff_thread = Thread(target=announcing_stuff)
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
 
@@ -143,10 +149,10 @@ def pushing_schedule_to_announcement():
                 for iteration in range(3):
                     SAYING_QUEUE.append(task_announcement)
 
-announcing_schedule_thread = Thread(target=pushing_schedule_to_announcement)
+pushing_schedule_to_announcement = Thread(target=pushing_schedule_to_announcement)
 
 # Main With Everything Compiled
 
 if __name__ == "__main__":
     thread_for_keeping_schedule_up_to_date.start()
-    announcing_schedule_thread.start()
+    pushing_schedule_to_announcement.start()
