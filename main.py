@@ -61,18 +61,17 @@ def keeping_schedule_up_to_date():
     while True:
 
         new_date = get_current_structured_date()
+        new_schedule = get_schedule(new_date)
 
         if new_date != previous_date:
 
-            populate_current_schedule(new_date)
+            populate_current_schedule(new_schedule)
             previous_date = new_date
 
         else:
 
-            new_schedule = get_schedule() 
-
             if new_schedule != previous_schedule:
-                populate_current_schedule(new_date)
+                populate_current_schedule(new_schedule)
                 previous_schedule = new_schedule
 
 
