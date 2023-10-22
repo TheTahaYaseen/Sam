@@ -134,6 +134,8 @@ def keeping_schedule_up_to_date():
             if new_schedule != previous_schedule:
                 populate_current_schedule(new_schedule)
                 previous_schedule = new_schedule
+
+        time.sleep(2)
     
 thread_for_keeping_schedule_up_to_date = Thread(target=keeping_schedule_up_to_date)
 
