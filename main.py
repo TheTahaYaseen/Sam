@@ -20,6 +20,14 @@ def get_current_structured_date():
     current_date = f"{current_day_of_the_month} {current_month} {current_year}"
     return current_date
 
+# Get Structured Time Function
+def get_current_structured_date():
+    current_datetime = datetime.datetime.now()
+    current_hour = current_datetime.strftime("%H")
+    current_minute = current_datetime.strftime("%M")
+    current_time = f"{current_hour}:{current_minute}"
+    return current_time
+
 # pyttsx3 Variables
 
 saying_engine = pyttsx3.init()
@@ -28,8 +36,8 @@ saying_engine.setProperty("rate", 200)
 speaker_voices = saying_engine.getProperty("voices")
 saying_engine.setProperty("voice", speaker_voices[1].id)
 
-# For Sam To Be Able To Say 
-def say(thing_to_say):
+# For Sam To Be Able To Speak 
+def speak(thing_to_say):
     saying_engine.say(thing_to_say)
     saying_engine.runAndWait()
 
