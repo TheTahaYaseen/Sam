@@ -18,6 +18,10 @@ def get_current_structured_date():
     current_date = f"{current_day_of_the_month} {current_month} {current_year}"
     return current_date
 
+# For Sam To Be Able To Say 
+def say():
+    pass
+
 # Google Sheets Variables
 
 credentials = service_account.Credentials.from_service_account_file("../credentials.json",  scopes=['https://www.googleapis.com/auth/spreadsheets'])
@@ -92,12 +96,10 @@ def keeping_schedule_up_to_date():
             if new_schedule != previous_schedule:
                 populate_current_schedule(new_schedule)
                 previous_schedule = new_schedule
-    
 
 thread_for_keeping_schedule_up_to_date = Thread(target=keeping_schedule_up_to_date)
 
 # Thread For Schedule Announcement For The Day | Going Through The Dictionary, Checking For Each's Time
 
-
 # Main With Everything Compiled
-keeping_schedule_up_to_date()
+keeping_schedule_up_to_date() # Here For Testing
