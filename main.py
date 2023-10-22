@@ -37,7 +37,7 @@ def get_schedule(schedule_date):
 # Dictionary For Announcements With Their Times
 
 # Structure = {"time": {"task": "task details"}}
-SCHEDULE = {}
+CURRENT_SCHEDULE = {}
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
 
