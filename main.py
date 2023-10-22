@@ -41,6 +41,12 @@ def get_schedule(schedule_date):
 # Structure = {"time": {"task": "task details"}}
 CURRENT_SCHEDULE = {}
 
+# Function For Populating Global Schedule Dictionary With A Proper Format
+
+def populate_current_schedule():
+    
+    global CURRENT_SCHEDULE
+
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
 
 # To Check:
