@@ -7,6 +7,8 @@ import datetime
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
+from threading import Thread
+
 # Get Structured Date Function
 def get_current_structured_date():
     current_datetime = datetime.datetime.now()
@@ -40,6 +42,32 @@ def get_schedule(schedule_date):
 CURRENT_SCHEDULE = {}
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
+
+# To Check:
+    # Date Changes
+    # New Changes In Sheet
+
+def keeping_schedule_up_to_date():
+    
+    previous_date = get_current_structured_date()
+    previous_schedule = get_schedule(previous_date)
+
+    while True:
+
+        new_date = get_current_structured_date()
+
+        if new_date != previous_date:
+
+            populate_current_schedule(new_date)
+            previous_date = new_date
+
+        else:
+
+            new_schedule = get_schedule() 
+
+            if new_schedule != previous_schedule:
+                populate_current_schedule(new_date)
+                previous_schedule = new_schedule
 
 
 # Thread For Schedule Announcement For The Day | Going Through The Dictionary, Checking For Each's Time
