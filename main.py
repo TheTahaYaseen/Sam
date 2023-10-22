@@ -28,7 +28,7 @@ def get_current_structured_time():
     current_hour = current_datetime.strftime("%H")
     current_minute = current_datetime.strftime("%M")
     current_time = f"{current_hour}:{current_minute}"
-    return current_time
+    return [current_time, current_hour] 
 
 # pyttsx3 Variables
 
@@ -75,6 +75,8 @@ def populate_current_schedule(schedule_to_populate_with):
     
     schedule_values = schedule_to_populate_with["values"]
     
+    current_hour = get_current_structured_time()[1]
+
     for schedule_value in schedule_values:
 
         length_of_schedule_value_array = len(schedule_value)
@@ -83,13 +85,15 @@ def populate_current_schedule(schedule_to_populate_with):
             task_time = schedule_value[0]
             task = schedule_value[1]
 
-            if length_of_schedule_value_array == 3:
-                task_detail = schedule_value[2]
-                CURRENT_SCHEDULE[task_time] = f"{task}, {task_detail}"
-            else:
-                CURRENT_SCHEDULE[task_time] = f"{task}"
+            task_hour = task_time.split(":")[0]
 
-    time.sleep(15)
+            if task_hour >= current_hour:
+
+                if length_of_schedule_value_array == 3:
+                    task_detail = schedule_value[2]
+                    CURRENT_SCHEDULE[task_time] = f"{task}, {task_detail}"
+                else:
+                    CURRENT_SCHEDULE[task_time] = f"{task}"
 
 # Thread For Properly Announcing
 def announcing_stuff():
@@ -130,7 +134,7 @@ def keeping_schedule_up_to_date():
             if new_schedule != previous_schedule:
                 populate_current_schedule(new_schedule)
                 previous_schedule = new_schedule
-
+    
 thread_for_keeping_schedule_up_to_date = Thread(target=keeping_schedule_up_to_date)
 
 # Thread For Schedule Announcement For The Day | Going Through The Dictiornary, Checking For Each's Time
@@ -141,7 +145,7 @@ def pushing_schedule_to_announcement():
 
     while True:
         
-        current_time = get_current_structured_time()
+        current_time = get_current_structured_time()[0]
         
         for task_time, task_announcement in CURRENT_SCHEDULE.items():
             
