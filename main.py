@@ -148,15 +148,21 @@ def pushing_schedule_to_announcement():
     while True:
         
         current_time = get_current_structured_time()[0]
-        
-        for task_time, task_announcement in CURRENT_SCHEDULE.items():
-            
-            if current_time == task_time:
 
-                CURRENT_SCHEDULE.pop(task_time)
+        try:
 
-                for iteration in range(3):
-                    SAYING_QUEUE.append(task_announcement)
+            for task_time, task_announcement in CURRENT_SCHEDULE.items():
+                
+                if current_time == task_time:
+
+                    CURRENT_SCHEDULE.pop(task_time)
+
+                    for iteration in range(3):
+                        SAYING_QUEUE.append(task_announcement)
+
+        except RuntimeError:
+
+            error = "Current Schedule Was Changed When It Was Being Operated On"
 
 pushing_schedule_to_announcement = Thread(target=pushing_schedule_to_announcement)
 
