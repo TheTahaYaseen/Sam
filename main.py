@@ -9,6 +9,8 @@ from googleapiclient.discovery import build
 
 from threading import Thread
 
+import pyttsx3
+
 # Get Structured Date Function
 def get_current_structured_date():
     current_datetime = datetime.datetime.now()
@@ -17,6 +19,14 @@ def get_current_structured_date():
     current_year = current_datetime.strftime("%Y")
     current_date = f"{current_day_of_the_month} {current_month} {current_year}"
     return current_date
+
+# pyttsx3 Variables
+
+saying_engine = pyttsx3.init()
+saying_engine.setProperty("rate", 200)
+
+speaker_voices = saying_engine.getProperty("voices")
+saying_engine.setProperty("voice", speaker_voices[1].id)
 
 # For Sam To Be Able To Say 
 def say():
