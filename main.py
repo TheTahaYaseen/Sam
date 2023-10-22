@@ -34,18 +34,10 @@ def get_schedule(schedule_date):
     response = service.spreadsheets().values().get(spreadsheetId = spreadsheet_id, range = schedule_range).execute()
     return response
 
-current_date = get_current_structured_date()
-current_schedule = get_schedule(current_date)
-print(current_schedule)
-
-# One Return Value
-# ['00:00', 'Test', 'Test 123']
-
-# Current Date
-
-
 # Dictionary For Announcements With Their Times
 
+# Structure = {"time": {"task": "task details"}}
+SCHEDULE = {}
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
 
