@@ -29,8 +29,9 @@ speaker_voices = saying_engine.getProperty("voices")
 saying_engine.setProperty("voice", speaker_voices[1].id)
 
 # For Sam To Be Able To Say 
-def say():
-    pass
+def say(thing_to_say):
+    saying_engine.say(thing_to_say)
+    saying_engine.runAndWait()
 
 # Google Sheets Variables
 
