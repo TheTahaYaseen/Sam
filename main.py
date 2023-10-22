@@ -46,6 +46,25 @@ CURRENT_SCHEDULE = {}
 def populate_current_schedule(schedule_to_populate_with):
     
     global CURRENT_SCHEDULE
+    
+    schedule_values = schedule_to_populate_with["values"]
+    
+    for schedule_value in schedule_values:
+
+        length_of_schedule_value_array = len(schedule_value)
+
+        if length_of_schedule_value_array != 1:
+            task_time = schedule_value[0]
+            task = schedule_value[1]
+
+            if length_of_schedule_value_array == 3:
+                task_detail = schedule_value[2]
+                CURRENT_SCHEDULE[task_time] = f"{task}, {task_detail}"
+            else:
+                CURRENT_SCHEDULE[task_time] = f"{task}"
+
+    print(CURRENT_SCHEDULE)
+
 
 # Thread For Checking And Updating Date | Accordingly, Configuring The Dictionary
 
@@ -73,11 +92,12 @@ def keeping_schedule_up_to_date():
             if new_schedule != previous_schedule:
                 populate_current_schedule(new_schedule)
                 previous_schedule = new_schedule
+    
 
 thread_for_keeping_schedule_up_to_date = Thread(target=keeping_schedule_up_to_date)
-
 
 # Thread For Schedule Announcement For The Day | Going Through The Dictionary, Checking For Each's Time
 
 
 # Main With Everything Compiled
+keeping_schedule_up_to_date()
