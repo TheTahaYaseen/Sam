@@ -43,7 +43,7 @@ CURRENT_SCHEDULE = {}
 
 # Function For Populating Global Schedule Dictionary With A Proper Format
 
-def populate_current_schedule():
+def populate_current_schedule(schedule_to_populate_with):
     
     global CURRENT_SCHEDULE
 
@@ -73,6 +73,8 @@ def keeping_schedule_up_to_date():
             if new_schedule != previous_schedule:
                 populate_current_schedule(new_schedule)
                 previous_schedule = new_schedule
+
+thread_for_keeping_schedule_up_to_date = Thread(target=keeping_schedule_up_to_date)
 
 
 # Thread For Schedule Announcement For The Day | Going Through The Dictionary, Checking For Each's Time
