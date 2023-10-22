@@ -142,5 +142,7 @@ def announcing_schedule():
 announcing_schedule_thread = Thread(target=announcing_schedule)
 
 # Main With Everything Compiled
-thread_for_keeping_schedule_up_to_date.start()
-announcing_schedule_thread.start()
+
+if __name__ == "__main__":
+    thread_for_keeping_schedule_up_to_date.start()
+    announcing_schedule_thread.start()
