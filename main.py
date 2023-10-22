@@ -8,7 +8,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 # Get Structured Date Function
-def get_current_structure_date():
+def get_current_structured_date():
     current_datetime = datetime.datetime.now()
     current_day_of_the_month = current_datetime.strftime("%d")
     current_month = current_datetime.strftime("%B")
@@ -18,13 +18,12 @@ def get_current_structure_date():
 
 # Google Sheets Variables
 
-credentials = service_account.Credentials.from_service_account_file("../credentials.json", ["https://www.googleapis.com/auth/spreadsheets"])
+credentials = service_account.Credentials.from_service_account_file("../credentials.json",  scopes=['https://www.googleapis.com/auth/spreadsheets'])
 service = build("sheets", "v4", credentials=credentials)
 
 spreadsheet_id = "1R1ooZQYaSHPByec1VqjOjUUd1SFjH_YsCsgpeZGXssI"
 
 # Getting Schedule Accordingly From Google Sheets
-
 
 # Current Date
 
